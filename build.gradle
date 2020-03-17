@@ -37,6 +37,22 @@ publishing {
 
                     mkp.dependencyManagement {
                         mkp.dependencies {
+                            for (File propertyFile in new File("$projectDir/src/main/boms").listFiles()) {
+                                String groupIdFromFile = propertyFile.name - '.properties'
+
+                                def versions = new Properties()
+                                versions.load(new StringReader(propertyFile.text))
+
+                                for (pair in versions.entrySet()) {
+                                    mkp.dependency {
+                                        mkp.groupId groupIdFromFile
+                                        mkp.artifactId pair.key
+                                        mkp.version pair.value
+                                        mkp.type 'pom'
+                                        mkp.scope 'import'
+                                    }
+                                }
+                            }
                             for (File propertyFile in new File("$projectDir/src/main/versions").listFiles()) {
 
                                 if (propertyFile.name == '_versions.properties') {
