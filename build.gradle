@@ -9,7 +9,12 @@ version getTagOrDefault('1.0.0-SNAPSHOT')
 publishing {
     repositories {
         maven {
-            url 'http://sandbox-archiva.glowing.net/repository/glow'
+            name 'glow'
+            url GLOW_MAVEN
+            credentials {
+                username = USERNAME
+                password = PASSWORD
+            }
         }
     }
     publications {
