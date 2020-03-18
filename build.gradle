@@ -9,12 +9,7 @@ version getTagOrDefault('1.0.0-SNAPSHOT')
 publishing {
     repositories {
         maven {
-            name = 'GitHub'
-            url = uri('https://maven.pkg.github.com/' + System.getenv('GITHUB_REPOSITORY'))
-            credentials {
-                username = 'mandylu'
-                password = System.getenv('GITHUB_TOKEN')
-            }
+            url 'http://sandbox-archiva.glowing.net/repository/glow'
         }
     }
     publications {
